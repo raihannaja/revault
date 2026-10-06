@@ -1,0 +1,77 @@
+{
+  "status": "success",
+  "message": "Daftar barang inspirasi Revault",
+  "total": 7,
+  "data": [
+    {
+      "id": 101,
+      "nama": "Jaket denim pria",
+      "kategori": "Pakaian",
+      "kondisi": "Baik",
+      "lokasi": "Malang",
+      "deskripsi": "Jaket denim ukuran M, warna masih bagus dan tidak ada bagian yang robek.",
+      "foto": "https://picsum.photos/seed/jaket-denim/600/420",
+      "penyalur": "Dimas"
+    },
+    {
+      "id": 102,
+      "nama": "Laptop lama untuk belajar",
+      "kategori": "Elektronik",
+      "kondisi": "Cukup",
+      "lokasi": "Surabaya",
+      "deskripsi": "Masih menyala normal, cocok untuk mengetik tugas dan belajar daring.",
+      "foto": "https://picsum.photos/seed/laptop-lama/600/420",
+      "penyalur": "Nadia"
+    },
+    {
+      "id": 103,
+      "nama": "Novel dan komik koleksi",
+      "kategori": "Buku",
+      "kondisi": "Baik",
+      "lokasi": "Malang",
+      "deskripsi": "Sekitar 20 buku novel dan komik, halaman lengkap dan bersih.",
+      "foto": "https://picsum.photos/seed/novel-komik/600/420",
+      "penyalur": "Fajar"
+    },
+    {
+      "id": 104,
+      "nama": "Kardus packing tebal",
+      "kategori": "Kardus",
+      "kondisi": "Baik",
+      "lokasi": "Batu",
+      "deskripsi": "15 kardus tebal sisa pindahan rumah, kuat untuk menyimpan barang.",
+      "foto": "https://picsum.photos/seed/kardus-packing/600/420",
+      "penyalur": "Wulan"
+    },
+    {
+      "id": 105,
+      "nama": "Kursi belajar kayu",
+      "kategori": "Lainnya",
+      "kondisi": "Cukup",
+      "lokasi": "Malang",
+      "deskripsi": "Kursi kayu kokoh, cat sedikit mengelupas tetapi masih nyaman dipakai.",
+      "foto": "https://picsum.photos/seed/kursi-belajar/600/420",
+      "penyalur": "Bagas"
+    },
+    {
+      "id": 106,
+      "nama": "Dress batik santai",
+      "kategori": "Pakaian",
+      "kondisi": "Baik",
+      "lokasi": "Malang",
+      "deskripsi": "Dress batik ukuran L, bahan adem dan sudah dicuci bersih.",
+      "foto": "https://picsum.photos/seed/dress-batik/600/420",
+      "penyalur": "Citra"
+    },
+    {
+      "id": 107,
+      "nama": "Sepatu Hiking bekas",
+      "kategori": "Pakaian",
+      "kondisi": "Cukup Baik",
+      "lokasi": "Surabaya",
+      "deskripsi": "Sepatu hiking ukuran 42, masih layak pakai untuk kegiatan outdoor.",
+      "foto": "https://picsum.photos/seed/sepatu-hiking/600/420",
+      "penyalur": "Sugeng"
+    }
+  ]
+}
