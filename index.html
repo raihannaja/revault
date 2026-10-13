@@ -19,12 +19,13 @@
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-mist/90 backdrop-blur border-b border-forest/10">
     <div class="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between gap-4">
-      <a href="#beranda" class="focus-ring rounded"> <img src="Assets/logo.png" alt="Revault" class="h-[90px] w-auto">
+      <a href="#beranda" class="focus-ring rounded"> <img src="assets/logo.png" alt="Revault" class="h-[90px] w-auto">
       </a>
       <nav class="hidden md:flex gap-7 text-sm font-medium">
         <a href="#beranda" class="nav-link hover:text-forest">Beranda</a>
         <a href="#barang" class="nav-link hover:text-forest">Cari Barang</a>
         <a href="#inspirasi" class="nav-link hover:text-forest">Inspirasi</a>
+        <a href="program.php" class="nav-link hover:text-forest">Program</a>
         <a href="#cara-kerja" class="nav-link hover:text-forest">Cara Kerja</a>
         <a href="#tentang" class="nav-link hover:text-forest">Tentang</a>
       </nav>
@@ -42,7 +43,7 @@
     </div>
     <nav id="mobileNav"
       class="md:hidden border-t border-forest/10 px-5 py-3 flex flex-col gap-3 text-sm font-medium">
-      <a href="#beranda">Beranda</a><a href="#barang">Cari Barang</a><a href="#inspirasi">Inspirasi</a><a
+      <a href="#beranda">Beranda</a><a href="#barang">Cari Barang</a><a href="#inspirasi">Inspirasi</a><a href="program.php">Program</a><a
         href="#cara-kerja">Cara Kerja</a><a href="#tentang">Tentang</a>
     </nav>
   </header>
@@ -94,7 +95,7 @@
         </dl>
       </div>
       <div class="relative">
-        <img src="Assets/bg3.jpg" alt="Contoh barang yang disalurkan"
+        <img src="assets/bg3.jpg" alt="Contoh barang yang disalurkan"
           class="w-full h-[420px] object-cover rounded-[2rem] bg-forest-soft transition duration-500 hover:scale-[1.02] hover:shadow-2xl"
           onerror="this.style.opacity=0">
         <div
@@ -386,6 +387,7 @@
     class="pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 translate-y-4 rounded-full bg-ink px-5 py-3 text-sm text-white opacity-0 transition">
   </div>
 
+  <script src="data/barang-tersedia.js"></script>
   <script src="script.js"></script>
   <script src="api.js"></script>
 </body>

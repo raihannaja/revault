@@ -1,14 +1,10 @@
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const KEY = 'revault-v2';
+// Data card berasal dari data/barang-tersedia.js (BARANG_TERSEDIA dan DATA_VERSION).
+const KEY = 'revault-v' + DATA_VERSION;
 const seed = () => ({
   role: 'penerima',
-  items: [
-    { id: 1, nama: 'Pakaian layak pakai', kategori: 'Pakaian', kondisi: 'Baik', lokasi: 'Malang', deskripsi: 'Satu kantong kemeja dan kaos, sudah dicuci.', foto: 'https://picsum.photos/seed/pakaian/600/420', status: 'tersedia', wa: '6281234567801', owner: 'Rina' },
-    { id: 2, nama: 'Kardus bekas', kategori: 'Kardus', kondisi: 'Baik', lokasi: 'Malang', deskripsi: '12 kardus ukuran sedang, cocok untuk pindahan.', foto: 'https://picsum.photos/seed/kardus/600/420', status: 'tersedia', wa: '6281234567802', owner: 'Budi' },
-    { id: 3, nama: 'Buku bekas kuliah', kategori: 'Buku', kondisi: 'Baik', lokasi: 'Malang', deskripsi: 'Buku teknik dan manajemen semester 1-4.', foto: 'https://picsum.photos/seed/buku/600/420', status: 'tersedia', wa: '6281234567801', owner: 'Rina' },
-    { id: 4, nama: 'Kipas angin meja', kategori: 'Elektronik', kondisi: 'Cukup', lokasi: 'Malang', deskripsi: 'Masih menyala, kecepatan 2 kurang stabil.', foto: 'https://picsum.photos/seed/kipas/600/420', status: 'tersedia', wa: '6281234567803', owner: 'Sari' }
-  ],
+  items: BARANG_TERSEDIA.map(b => ({ ...b })), // salinan, agar data asli tidak ikut berubah
   requests: [], me: {}
 });
 let state;

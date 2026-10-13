@@ -62,3 +62,19 @@ revault/
 ├── index.html
 ├── style.css
 └── README.md
+
+## 🗂️ Data Card Barang Tersedia
+
+Semua card di bagian "Barang yang tersedia" berasal dari satu file: `data/barang-tersedia.js`.
+Untuk menambah, mengubah, atau menghapus card, edit file itu saja lalu naikkan `DATA_VERSION`.
+
+## 🐘 Halaman PHP (Program Prioritas)
+
+| Task | Isi | Lokasi |
+|------|-----|--------|
+| 1 Halaman PHP | Variabel halaman (`$namaSitus`, `$tagline`, `$menu`, dst.) | `program.php` |
+| 2 Proses data | Array multidimensi, status/badge kondisional, loop penomoran | `includes/data-program.php`, `program.php` |
+| 3 SSR dynamic | Grid card program dirender di server dengan `foreach` | `program.php` |
+
+Jalankan dengan `php -S localhost:8000` lalu buka `http://localhost:8000/program.php`
+(Live Server tidak bisa menjalankan PHP). Filter: `program.php?status=berjalan`.
