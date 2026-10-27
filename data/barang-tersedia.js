@@ -11,7 +11,7 @@
      kondisi   : Baik | Cukup | Perlu perbaikan
      lokasi    : kota / daerah barang
      deskripsi : keterangan singkat
-     foto      : path foto di folder assets, mis. 'assets/baju2.jpg'
+     foto      : path foto di folder Assets, mis. 'Assets/baju2.jpg'
                  (kosongkan '' kalau belum ada foto)
      status    : 'tersedia' (tampil di daftar) | 'tersalurkan'
      wa        : nomor WhatsApp penyalur, format 62xxxxxxxxxx
@@ -22,7 +22,7 @@
    data terbaru. Catatan: pengajuan dan posting yang tersimpan ikut
    ter-reset saat versi dinaikkan.
    ===================================================================== */
-const DATA_VERSION = '6';
+const DATA_VERSION = '3';
 
 const BARANG_TERSEDIA = [
   {
@@ -32,7 +32,7 @@ const BARANG_TERSEDIA = [
     kondisi: 'Baik',
     lokasi: 'Malang',
     deskripsi: 'Satu kantong kemeja dan kaos, sudah dicuci.',
-    foto: 'assets/baju2.jpg',
+    foto: 'Assets/baju2.jpg',
     status: 'tersedia',
     wa: '6281234567801',
     owner: 'Rina'
@@ -44,7 +44,7 @@ const BARANG_TERSEDIA = [
     kondisi: 'Baik',
     lokasi: 'Malang',
     deskripsi: '12 kardus ukuran sedang, cocok untuk pindahan.',
-    foto: 'assets/kardus.jpg',
+    foto: 'Assets/kardus.jpg',
     status: 'tersedia',
     wa: '6281234567802',
     owner: 'Budi'
@@ -56,7 +56,7 @@ const BARANG_TERSEDIA = [
     kondisi: 'Baik',
     lokasi: 'Malang',
     deskripsi: 'Buku teknik dan manajemen semester 1-4.',
-    foto: 'assets/buku.jpg',
+    foto: 'Assets/buku.jpg',
     status: 'tersedia',
     wa: '6281234567801',
     owner: 'Rina'
@@ -68,21 +68,9 @@ const BARANG_TERSEDIA = [
     kondisi: 'Cukup',
     lokasi: 'Malang',
     deskripsi: 'Masih menyala, kecepatan 2 kurang stabil.',
-    foto: 'assets/kipas.jpg',
+    foto: 'Assets/kipas.jpg',
     status: 'tersedia',
     wa: '6281234567803',
     owner: 'Sari'
-  },
-  {
-    id: 5,
-    nama: 'Bantal Tidur',
-    kategori: 'Furniture',
-    kondisi: 'Cukup',
-    lokasi: 'Malang',
-    deskripsi: 'Masih bagus cuma banyak pulaunya.',
-    foto: 'assets/bantal.jpg',
-    status: 'tersedia',
-    wa: '6281234567664',
-    owner: 'Amin'
   }
 ];

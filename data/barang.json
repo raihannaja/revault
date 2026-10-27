@@ -24,6 +24,16 @@
       "penyalur": "Nadia"
     },
     {
+      "id": 103,
+      "nama": "Novel dan komik koleksi",
+      "kategori": "Buku",
+      "kondisi": "Baik",
+      "lokasi": "Malang",
+      "deskripsi": "Sekitar 20 buku novel dan komik, halaman lengkap dan bersih.",
+      "foto": "https://picsum.photos/seed/novel-komik/600/420",
+      "penyalur": "Fajar"
+    },
+    {
       "id": 104,
       "nama": "Kardus packing tebal",
       "kategori": "Kardus",

@@ -13,7 +13,7 @@
    Nama kunci sengaja sama dengan data JavaScript (nama, kategori,
    deskripsi, foto, lokasi) supaya mudah dipahami.
    Status (Berjalan / Selesai / Segera) TIDAK ditulis di sini, tetapi
-   dihitung otomatis dari target dan tercapai di program.php.
+   dihitung otomatis oleh class Program (classes/Program.php) dari target dan tercapai.
    ===================================================================== */
 return [
     [
@@ -21,7 +21,7 @@ return [
         'nama'       => 'Pakaian Layak untuk Semua',
         'kategori'   => 'Pakaian',
         'deskripsi'  => 'Mengumpulkan kemeja, kaos, dan jaket yang masih bagus agar bisa dipakai lagi oleh yang membutuhkan.',
-        'foto'       => 'assets/baju2.jpg',
+        'foto'       => 'Assets/baju2.jpg',
         'lokasi'     => 'Malang',
         'target'     => 100,
         'tercapai'   => 64,
@@ -33,7 +33,7 @@ return [
         'nama'       => 'Kardus Pindahan Gratis',
         'kategori'   => 'Kardus',
         'deskripsi'  => 'Kardus bekas yang masih kuat dibagikan untuk keperluan pindahan dan pengemasan barang.',
-        'foto'       => 'assets/kardus.jpg',
+        'foto'       => 'Assets/kardus.jpg',
         'lokasi'     => 'Batu',
         'target'     => 150,
         'tercapai'   => 150,
@@ -45,7 +45,7 @@ return [
         'nama'       => 'Buku untuk Pelajar',
         'kategori'   => 'Buku',
         'deskripsi'  => 'Buku kuliah dan bacaan bekas disalurkan kepada pelajar yang membutuhkan bahan belajar.',
-        'foto'       => 'assets/buku.jpg',
+        'foto'       => 'Assets/buku.jpg',
         'lokasi'     => 'Malang',
         'target'     => 200,
         'tercapai'   => 35,
@@ -57,7 +57,7 @@ return [
         'nama'       => 'Elektronik Layak Pakai',
         'kategori'   => 'Elektronik',
         'deskripsi'  => 'Kipas, lampu, dan perangkat kecil yang masih menyala diperiksa lalu diberikan kembali.',
-        'foto'       => 'assets/kipas.jpg',
+        'foto'       => 'Assets/kipas.jpg',
         'lokasi'     => 'Malang',
         'target'     => 50,
         'tercapai'   => 0,
@@ -69,7 +69,7 @@ return [
         'nama'       => 'Perlengkapan Harian',
         'kategori'   => 'Lainnya',
         'deskripsi'  => 'Tas, sepatu, dan perlengkapan harian yang masih layak dipakai untuk sekolah dan bekerja.',
-        'foto'       => 'assets/bg2.png',
+        'foto'       => 'Assets/bg2.png',
         'lokasi'     => 'Surabaya',
         'target'     => 80,
         'tercapai'   => 12,
@@ -81,7 +81,7 @@ return [
         'nama'       => 'Sudut Barang Serbaguna',
         'kategori'   => 'Lainnya',
         'deskripsi'  => 'Titik kumpul barang rumah tangga dan dekorasi yang masih bernilai guna di tiap kota.',
-        'foto'       => 'assets/bg3.jpg',
+        'foto'       => 'Assets/bg3.jpg',
         'lokasi'     => 'Malang',
         'target'     => 60,
         'tercapai'   => 0,

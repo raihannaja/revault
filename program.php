@@ -4,10 +4,15 @@ declare(strict_types=1);
 /* =====================================================================
    program.php  -  Halaman PHP Revault (Server-Side Rendering)
 
-   Task 1 : Buat halaman PHP (variabel sesuai kode dan tema Revault)
-   Task 2 : Proses data dengan PHP (array multidimensi, status/badge
-            kondisional, loop penomoran)
-   Task 3 : Bangun konten dinamis di server (grid card Program Prioritas)
+   Tugas sebelumnya (procedural):
+     Task 1 : Halaman PHP (variabel sesuai kode dan tema Revault)
+     Task 2 : Proses data (array multidimensi, status/badge, penomoran)
+     Task 3 : Konten dinamis di server (grid card Program Prioritas)
+
+   Pertemuan 6 (OOP): data dan perhitungan kini dikelola object
+     Task 01 : Create a Class        -> classes/Program.php
+     Task 02 : Properties & Methods  -> classes/Program.php
+     Task 03 : Dynamic Content with Object -> halaman ini (object -> PHP -> HTML)
 
    Cara menjalankan (Live Server TIDAK bisa menjalankan PHP):
      php -S localhost:8000      lalu buka http://localhost:8000/program.php
@@ -36,10 +41,14 @@ $menu = [
 
 
 /* ---------------------------------------------------------------------
-   TASK 2 - PROSES DATA
+   PROSES DATA DENGAN OBJECT (OOP)
+   Alur: array data -> class DaftarProgram -> object Program -> HTML
+   Perhitungan persen, status, badge, dan nomor kini ada di dalam class
+   (lihat classes/Program.php), bukan lagi fungsi-fungsi terpisah.
    --------------------------------------------------------------------- */
+require_once __DIR__ . '/classes/DaftarProgram.php';
 
-// (a) Array multidimensi: data program ada di includes/data-program.php
+// Array multidimensi: data program ada di includes/data-program.php
 $dataProgram = require __DIR__ . '/includes/data-program.php';
 
 // Aman menampilkan teks ke HTML (sama fungsinya dengan esc() di script.js)
@@ -48,73 +57,21 @@ function e(string|int|float $teks): string
     return htmlspecialchars((string) $teks, ENT_QUOTES, 'UTF-8');
 }
 
-function hitungPersen(int $tercapai, int $target): int
-{
-    if ($target <= 0) {
-        return 0;
-    }
-    return min(100, (int) round($tercapai / $target * 100));
-}
+// Membuat object: setiap baris data menjadi satu object Program
+$daftar        = new DaftarProgram($dataProgram, $kotaDefault);
+$program       = $daftar->semua();
+$totalProgram  = $daftar->total();
+$totalTercapai = $daftar->totalTercapai();
+$totalTarget   = $daftar->totalTarget();
+$persenTotal   = $daftar->persenTotal();
 
-// (b) Status kondisional: ditentukan dari progres program
-function tentukanStatus(int $persen, int $tercapai): string
-{
-    if ($persen >= 100) {
-        return 'selesai';
-    } elseif ($tercapai > 0) {
-        return 'berjalan';
-    }
-    return 'segera';
-}
-
-// (b) Badge kondisional: warna sama dengan badge() di script.js
-//     Hasil: [kelas badge, label badge, kelas progress bar]
-function badgeStatus(string $status): array
-{
-    return match ($status) {
-        'selesai'  => ['bg-forest-soft text-forest', 'Selesai',  'bg-forest'],
-        'berjalan' => ['bg-sun/25 text-amber-900',   'Berjalan', 'bg-sun'],
-        default    => ['bg-ink/10 text-ink',         'Segera',   'bg-ink/20'],
-    };
-}
-
-// (c) Loop penomoran: setiap program diberi nomor urut 01, 02, 03, ...
-$program = [];
-$no = 1;
-foreach ($dataProgram as $p) {
-    $persen = hitungPersen($p['tercapai'], $p['target']);
-    $status = tentukanStatus($persen, $p['tercapai']);
-    [$kelasBadge, $labelBadge, $kelasBar] = badgeStatus($status);
-
-    $program[] = $p + [
-        'no'         => $no,
-        'nomor'      => str_pad((string) $no, 2, '0', STR_PAD_LEFT),
-        'persen'     => $persen,
-        'sisa'       => max(0, $p['target'] - $p['tercapai']),
-        'status'     => $status,
-        'kelasBadge' => $kelasBadge,
-        'labelBadge' => $labelBadge,
-        'kelasBar'   => $kelasBar,
-    ];
-    $no++;
-}
-
-// (d) Ringkasan statistik dari array
-$totalProgram    = count($program);
-$jumlahPerStatus = array_count_values(array_column($program, 'status'));
-$totalTercapai   = array_sum(array_column($program, 'tercapai'));
-$totalTarget     = array_sum(array_column($program, 'target'));
-$persenTotal     = hitungPersen($totalTercapai, $totalTarget);
-
-// (e) Filter dari URL: program.php?status=berjalan (hanya nilai yang diizinkan)
+// Filter dari URL: program.php?status=berjalan (hanya nilai yang diizinkan)
 $opsiFilter = ['semua' => 'Semua', 'berjalan' => 'Berjalan', 'selesai' => 'Selesai', 'segera' => 'Segera'];
 $filter = $_GET['status'] ?? 'semua';
 if (!is_string($filter) || !array_key_exists($filter, $opsiFilter)) {
     $filter = 'semua';
 }
-$programTampil = $filter === 'semua'
-    ? $program
-    : array_values(array_filter($program, fn(array $p): bool => $p['status'] === $filter));
+$programTampil = $daftar->filterStatus($filter);
 
 const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12Z"/><path d="M9 9c0 3 3 6 6 6l1-2-2-1-1 .8a4 4 0 0 1-1.800-1.800L12 10l-1-2-2 1Z"/></svg>';
 ?>
@@ -140,7 +97,7 @@ const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
   <!-- Header: sama dengan index.html, menu dibuat dengan loop -->
   <header class="sticky top-0 z-40 bg-mist/90 backdrop-blur border-b border-forest/10">
     <div class="mx-auto max-w-6xl px-5 h-16 flex items-center justify-between gap-4">
-      <a href="index.html#beranda" class="focus-ring rounded"><img src="assets/logo.png" alt="<?= e($namaSitus) ?>"
+      <a href="index.html#beranda" class="focus-ring rounded"><img src="Assets/logo.png" alt="<?= e($namaSitus) ?>"
           class="h-[90px] w-auto"></a>
       <nav class="hidden md:flex gap-7 text-sm font-medium" aria-label="Menu utama">
         <?php foreach ($menu as $m): ?>
@@ -175,11 +132,11 @@ const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
         </div>
         <div>
           <dt class="text-sm text-ink/60">Sedang berjalan</dt>
-          <dd class="font-display text-3xl font-bold"><?= $jumlahPerStatus['berjalan'] ?? 0 ?></dd>
+          <dd class="font-display text-3xl font-bold"><?= $daftar->jumlahStatus('berjalan') ?></dd>
         </div>
         <div>
           <dt class="text-sm text-ink/60">Selesai</dt>
-          <dd class="font-display text-3xl font-bold"><?= $jumlahPerStatus['selesai'] ?? 0 ?></dd>
+          <dd class="font-display text-3xl font-bold"><?= $daftar->jumlahStatus('selesai') ?></dd>
         </div>
         <div>
           <dt class="text-sm text-ink/60">Barang tersalurkan</dt>
@@ -205,14 +162,14 @@ const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($program as $p): ?>
+              <?php foreach ($program as $p): [$kelasBadge, $labelBadge, $kelasBar] = $p->getBadge(); ?>
                 <tr class="border-t border-forest/10">
-                  <td class="px-4 py-3 font-display font-bold text-forest"><?= e($p['nomor']) ?></td>
-                  <td class="px-4 py-3 font-medium"><?= e($p['nama']) ?></td>
-                  <td class="px-4 py-3 text-ink/70"><?= e($p['kategori']) ?></td>
-                  <td class="px-4 py-3 text-ink/70"><?= $p['tercapai'] ?>/<?= $p['target'] ?> (<?= $p['persen'] ?>%)</td>
+                  <td class="px-4 py-3 font-display font-bold text-forest"><?= e($p->getNomor()) ?></td>
+                  <td class="px-4 py-3 font-medium"><?= e($p->getNama()) ?></td>
+                  <td class="px-4 py-3 text-ink/70"><?= e($p->getKategori()) ?></td>
+                  <td class="px-4 py-3 text-ink/70"><?= $p->getTercapai() ?>/<?= $p->getTarget() ?> (<?= $p->getPersen() ?>%)</td>
                   <td class="px-4 py-3"><span
-                      class="rounded-full px-3 py-1 text-xs font-medium <?= e($p['kelasBadge']) ?>"><?= e($p['labelBadge']) ?></span>
+                      class="rounded-full px-3 py-1 text-xs font-medium <?= e($kelasBadge) ?>"><?= e($labelBadge) ?></span>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -247,50 +204,49 @@ const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
         </div>
       <?php else: ?>
         <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <?php foreach ($programTampil as $p): ?>
+          <?php foreach ($programTampil as $p): [$kelasBadge, $labelBadge, $kelasBar] = $p->getBadge(); ?>
             <article
               class="group flex flex-col overflow-hidden rounded-2xl border border-forest/10 bg-white transition duration-300 hover:-translate-y-1.5 hover:border-forest/30 hover:shadow-xl">
               <div class="relative overflow-hidden">
-                <img src="<?= e($p['foto']) ?>" alt="Foto program <?= e($p['nama']) ?>" loading="lazy"
+                <img src="<?= e($p->getFoto()) ?>" alt="Foto program <?= e($p->getNama()) ?>" loading="lazy"
                   class="h-48 w-full object-cover bg-forest-soft transition duration-500 group-hover:scale-105"
                   onerror="this.style.opacity=0">
                 <span
-                  class="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-sun font-display font-bold text-ink shadow"><?= e($p['nomor']) ?></span>
+                  class="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-sun font-display font-bold text-ink shadow"><?= e($p->getNomor()) ?></span>
                 <span
-                  class="absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-medium shadow <?= e($p['kelasBadge']) ?>"><?= e($p['labelBadge']) ?></span>
+                  class="absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-medium shadow <?= e($kelasBadge) ?>"><?= e($labelBadge) ?></span>
               </div>
 
               <div class="flex flex-1 flex-col p-5">
                 <div class="flex items-start justify-between gap-2">
-                  <h3 class="font-display text-xl font-bold"><?= e($p['nama']) ?></h3>
+                  <h3 class="font-display text-xl font-bold"><?= e($p->getNama()) ?></h3>
                   <span
-                    class="shrink-0 rounded-full bg-forest-soft px-3 py-1 text-xs text-forest"><?= e($p['kategori']) ?></span>
+                    class="shrink-0 rounded-full bg-forest-soft px-3 py-1 text-xs text-forest"><?= e($p->getKategori()) ?></span>
                 </div>
-                <p class="mt-1 text-sm text-ink/60"><?= e($p['lokasi'] ?: $kotaDefault) ?> &middot; oleh
-                  <?= e($p['penanggung']['nama']) ?></p>
-                <p class="mt-3 text-sm text-ink/80"><?= e($p['deskripsi']) ?></p>
+                <p class="mt-1 text-sm text-ink/60"><?= e($p->getProfile()) ?></p>
+                <p class="mt-3 text-sm text-ink/80"><?= e($p->getDeskripsi()) ?></p>
 
                 <!-- progres -->
                 <div class="mt-4">
                   <div class="flex justify-between text-xs text-ink/60">
-                    <span><?= $p['tercapai'] ?> dari <?= $p['target'] ?> barang</span>
-                    <span><?= $p['persen'] ?>%</span>
+                    <span><?= $p->getTercapai() ?> dari <?= $p->getTarget() ?> barang</span>
+                    <span><?= $p->getPersen() ?>%</span>
                   </div>
                   <div class="mt-1 h-2 overflow-hidden rounded-full bg-forest-soft" role="progressbar"
-                    aria-valuenow="<?= $p['persen'] ?>" aria-valuemin="0" aria-valuemax="100"
-                    aria-label="Progres <?= e($p['nama']) ?>">
-                    <div class="h-full rounded-full <?= e($p['kelasBar']) ?>" style="width: <?= $p['persen'] ?>%"></div>
+                    aria-valuenow="<?= $p->getPersen() ?>" aria-valuemin="0" aria-valuemax="100"
+                    aria-label="Progres <?= e($p->getNama()) ?>">
+                    <div class="h-full rounded-full <?= e($kelasBar) ?>" style="width: <?= $p->getPersen() ?>%"></div>
                   </div>
-                  <?php if ($p['status'] === 'selesai'): ?>
+                  <?php if ($p->getStatus() === 'selesai'): ?>
                     <p class="mt-1 text-xs text-forest">Target tercapai.</p>
                   <?php else: ?>
-                    <p class="mt-1 text-xs text-ink/60">Kurang <?= $p['sisa'] ?> barang lagi.</p>
+                    <p class="mt-1 text-xs text-ink/60">Kurang <?= $p->getSisa() ?> barang lagi.</p>
                   <?php endif; ?>
                 </div>
 
                 <!-- tahap kerja: loop bersarang dengan penomoran -->
                 <ol class="mt-4 flex-1 space-y-1.5 text-sm text-ink/80">
-                  <?php foreach ($p['tahap'] as $i => $tahap): ?>
+                  <?php foreach ($p->getTahap() as $i => $tahap): ?>
                     <li class="flex items-center gap-2">
                       <span
                         class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-forest-soft text-xs font-medium text-forest"><?= $i + 1 ?></span>
@@ -303,7 +259,7 @@ const WA_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
                   <a href="index.html#barang"
                     class="focus-ring rounded-full bg-forest px-5 py-2.5 text-sm font-medium text-white transition hover:bg-forest-dark">Lihat
                     barang</a>
-                  <a href="https://wa.me/<?= e($p['penanggung']['wa']) ?>?text=<?= rawurlencode('Halo ' . $p['penanggung']['nama'] . ', saya tertarik dengan program "' . $p['nama'] . '" di ' . $namaSitus . '.') ?>"
+                  <a href="<?= e($p->getWaLink($namaSitus)) ?>"
                     target="_blank" rel="noopener"
                     class="focus-ring inline-flex items-center gap-2 rounded-full border border-forest px-4 py-2.5 text-sm font-medium text-forest transition hover:bg-forest-soft"><?= WA_ICON ?>
                     Hubungi</a>

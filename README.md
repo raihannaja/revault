@@ -78,3 +78,29 @@ Untuk menambah, mengubah, atau menghapus card, edit file itu saja lalu naikkan `
 
 Jalankan dengan `php -S localhost:8000` lalu buka `http://localhost:8000/program.php`
 (Live Server tidak bisa menjalankan PHP). Filter: `program.php?status=berjalan`.
+
+## 🧱 PHP OOP (Pertemuan 6: From Procedural to Object-Oriented)
+
+Halaman `program.php` kini memakai object. Class `President` di materi menjadi class `Program` di Revault.
+
+| Task | Isi | Lokasi |
+|------|-----|--------|
+| 01 Create a Class | Class `Program` mewakili satu program prioritas | `classes/Program.php` |
+| 02 Properties & Methods | Property (nama, kategori, target, tercapai, dst.) dan method (`getProfile()`, `getTahap()`, `getPersen()`, `getStatus()`, `getBadge()`) | `classes/Program.php` |
+| 03 Dynamic Content with Object | Object diolah PHP menjadi grid card HTML | `program.php`, `classes/DaftarProgram.php` |
+
+Konsep yang dipakai: class, object, property, method, constructor (`__construct`), encapsulation
+(property `private` + getter/setter `public`), dan pengolahan banyak object lewat `DaftarProgram`.
+
+Uji: `php tests/uji-program.php`
+
+### Jawaban pertanyaan demo
+1. **Class apa yang dibuat?** `Program` (satu program) dan `DaftarProgram` (kumpulan program).
+2. **Object apa yang digunakan?** Satu object `Program` untuk tiap baris di `includes/data-program.php`, dan satu object `DaftarProgram`.
+3. **Property apa yang dimiliki object?** `id`, `no`, `nama`, `kategori`, `deskripsi`, `foto`, `lokasi`, `target`, `tercapai`, `tahap`, `penanggungNama`, `penanggungWa` (semua `private`).
+4. **Method apa yang dibuat?** `getProfile()`, `getTahap()`, `getNomor()`, `getPersen()`, `getSisa()`, `getStatus()`, `getBadge()`, `getWaLink()`, `setTercapai()`, serta getter dasar.
+5. **Bagaimana object menghasilkan data pada halaman?** Array data menjadi object `Program` lewat constructor, `program.php` memanggil method seperti `$p->getNama()` di dalam `foreach`, lalu PHP mencetaknya sebagai HTML card.
+
+### Review: bagian mana yang lebih mudah dikelola dengan object?
+Perhitungan persen, status, dan warna badge dulu berupa fungsi terpisah yang menerima array. Sekarang semuanya ada di dalam `Program`, jadi
+aturannya ada di satu tempat, nilai yang salah dijaga oleh setter (misalnya `tercapai` tidak bisa melebihi `target`), dan tampilan cukup memanggil method.

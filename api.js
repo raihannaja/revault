@@ -1,11 +1,11 @@
 /* =====================================================================
-  Implementasi REST API & Fetch API (Single Page Application)
-  File ini berdiri sendiri dan tidak mengubah script.js.
-  Memakai helper yang sudah ada di script.js: $, esc, imgTag, goSearch.
+   Implementasi REST API & Fetch API (Single Page Application)
+   File ini berdiri sendiri dan tidak mengubah script.js.
+   Memakai helper yang sudah ada di script.js: $, esc, imgTag, goSearch.
 
-  Task 01: Connect to API (fetch API & parsing JSON)
-  Task 02: Display API Data (DOM manipulation dinamis)
-  Task 03: Handle API State (loading, success, error, tombol Coba Lagi)
+   Task 01: Connect to API (fetch API & parsing JSON)
+   Task 02: Display API Data (DOM manipulation dinamis)
+   Task 03: Handle API State (loading, success, error, tombol Coba Lagi)
    ===================================================================== */
 
 /* ---------- TASK 01: Connect to API ---------- */
@@ -18,8 +18,8 @@ let apiDemoError = new URLSearchParams(location.search).get('demo') === 'error';
 // Pesan untuk status HTTP (mirip contoh error: { "status": 404, "message": "Data tidak ditemukan" })
 const pesanStatus = st =>
   st === 404 ? 'Data tidak ditemukan' :
-    st >= 500 ? 'Terjadi gangguan pada server' :
-      'Permintaan ditolak oleh server';
+  st >= 500 ? 'Terjadi gangguan pada server' :
+  'Permintaan ditolak oleh server';
 
 // Error khusus agar tiap kegagalan punya pesan yang jelas untuk pengguna.
 class ApiError extends Error {
