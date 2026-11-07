@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-/* Uji sederhana OOP Revault.  Jalankan:  php tests/uji-program.php */
-require_once __DIR__ . '/../classes/DaftarProgram.php';
+/* Uji OOP + MVC Revault.  Jalankan:  php tests/uji-program.php */
+require_once __DIR__ . '/../Controller/ProgramController.php';
 
 $gagal = 0;
 function cek(string $nama, bool $hasil): void
@@ -12,7 +12,7 @@ function cek(string $nama, bool $hasil): void
     if (!$hasil) { $gagal++; }
 }
 
-$data = require __DIR__ . '/../includes/data-program.php';
+$data = require __DIR__ . '/../Model/data-program.php';
 $daftar = new DaftarProgram($data);
 $p1 = $daftar->semua()[0];
 
@@ -56,6 +56,31 @@ cek('Filter status berjalan hanya berisi berjalan',
     count($daftar->filterStatus('berjalan')) === $daftar->jumlahStatus('berjalan')
     && array_reduce($daftar->filterStatus('berjalan'), fn($c, Program $p) => $c && $p->getStatus() === 'berjalan', true));
 cek('Statistik total tercapai/target konsisten', $daftar->persenTotal() === (int) round($daftar->totalTercapai() / $daftar->totalTarget() * 100));
+
+// ---------------- MVC: Model ----------------
+cek('Model: cari(id) menemukan program', $daftar->cari(3)?->getNama() === 'Buku untuk Pelajar');
+cek('Model: cari(id) tak dikenal mengembalikan null', $daftar->cari(999) === null);
+cek('Model: muatDariFile membaca data dari Model/data-program.php', DaftarProgram::muatDariFile()->total() === count($data));
+cek('Model: Situs menyediakan nama dan menu', (new Situs())->getNama() === 'Revault' && count((new Situs())->getMenu()) > 0);
+
+// ---------------- MVC: Controller ----------------
+$c = new ProgramController();
+$hasil = $c->process(['status' => 'berjalan']);
+cek('Controller: process() meneruskan filter yang valid', $hasil['filter'] === 'berjalan');
+cek('Controller: process() hanya mengirim program berjalan ke View',
+    count($hasil['programTampil']) === $daftar->jumlahStatus('berjalan'));
+cek('Controller: filter tidak valid menjadi "semua"', $c->process(['status' => '<script>'])['filter'] === 'semua');
+cek('Controller: filter bertipe array menjadi "semua"', $c->process(['status' => ['x']])['filter'] === 'semua');
+cek('Controller: process() menyertakan statistik dari Model', $hasil['statistik']['total'] === count($data));
+
+// ---------------- MVC: View (hasil HTML) ----------------
+ob_start(); $c->index(); $html = ob_get_clean();
+cek('View: index() menghasilkan HTML daftar program', str_contains($html, 'Pakaian Layak untuk Semua') && str_contains($html, '<article'));
+ob_start(); $c->show(2); $html = ob_get_clean();
+cek('View: show(2) menampilkan detail program', str_contains($html, 'Kardus Pindahan Gratis') && str_contains($html, 'Tahap kerja'));
+ob_start(); $c->show(999); $html = ob_get_clean();
+cek('View: show(999) menampilkan halaman tidak ditemukan', str_contains($html, 'Program tidak ditemukan'));
+cek('View: e() meng-escape HTML (aman dari injection)', e('<b onclick="x">') === '&lt;b onclick=&quot;x&quot;&gt;');
 
 echo PHP_EOL . ($gagal === 0 ? 'SEMUA UJI LULUS' : "$gagal uji GAGAL") . PHP_EOL;
 exit($gagal === 0 ? 0 : 1);

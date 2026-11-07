@@ -4,9 +4,9 @@ declare(strict_types=1);
 require_once __DIR__ . '/Program.php';
 
 /* =====================================================================
-   class DaftarProgram  -  kumpulan object Program (OOP data processing)
-   Mengelola banyak object sekaligus: membuat object dari array data,
-   memfilter, dan menghitung statistik.
+   MODEL: class DaftarProgram  -  kumpulan object Program (data access)
+   Peran Model sesuai materi: menyimpan data, mengambil data (muatDariFile,
+   semua, cari, filterStatus), dan menghitung data bisnis (statistik).
    ===================================================================== */
 class DaftarProgram
 {
@@ -21,6 +21,23 @@ class DaftarProgram
             $this->items[] = new Program($baris, $no, $kotaDefault);
             $no++;
         }
+    }
+
+    // Data access: membaca array data dari Model/data-program.php
+    public static function muatDariFile(string $kotaDefault = 'Malang'): self
+    {
+        return new self(require __DIR__ . '/data-program.php', $kotaDefault);
+    }
+
+    // Mengambil satu program berdasarkan id (null jika tidak ada)
+    public function cari(int $id): ?Program
+    {
+        foreach ($this->items as $p) {
+            if ($p->getId() === $id) {
+                return $p;
+            }
+        }
+        return null;
     }
 
     /** @return Program[] */

@@ -1,6 +1,6 @@
 <?php
 /* =====================================================================
-   DATA PROGRAM PRIORITAS REVAULT  (array multidimensi)
+   MODEL: DATA PROGRAM PRIORITAS REVAULT  (array multidimensi)
    Untuk menambah / mengubah program, cukup edit file ini.
 
    Setiap program adalah satu array dengan kunci:
@@ -13,7 +13,7 @@
    Nama kunci sengaja sama dengan data JavaScript (nama, kategori,
    deskripsi, foto, lokasi) supaya mudah dipahami.
    Status (Berjalan / Selesai / Segera) TIDAK ditulis di sini, tetapi
-   dihitung otomatis oleh class Program (classes/Program.php) dari target dan tercapai.
+   dihitung otomatis oleh class Program (Model/Program.php) dari target dan tercapai.
    ===================================================================== */
 return [
     [

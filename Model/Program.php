@@ -2,14 +2,13 @@
 declare(strict_types=1);
 
 /* =====================================================================
-   class Program  -  satu object mewakili satu program prioritas Revault
-   (padanan class President di materi Pertemuan 6)
+   MODEL: class Program  -  satu object mewakili satu program prioritas
+   (padanan Model/President.php di materi Pertemuan 7)
 
-   Task 01 : Create a Class        -> class Program
-   Task 02 : Properties & Methods  -> property + method di bawah ini
-   Materi  : Constructor           -> __construct()
-             Encapsulation         -> property private, diakses lewat
-                                      getter/setter yang public
+   Model hanya mengurus DATA dan aturan datanya (persen, status, badge).
+   Model TIDAK tahu tentang HTML, URL, atau request pengguna.
+
+   Pertemuan 6 (OOP): class, property, method, constructor, encapsulation.
    ===================================================================== */
 class Program
 {
