@@ -153,3 +153,13 @@ Jalankan dengan `php -S localhost:8000`. Uji dengan `php tests/uji-program.php`.
 - **Mengubah tampilan card:** cukup edit `View/partials/program-card.php`, aturan status tidak ikut berubah.
 - **Menambah halaman baru** (misalnya detail): tambah method di Controller dan satu file View. Model dipakai ulang.
 - **Menguji:** Model dan Controller bisa diuji lewat terminal tanpa membuka browser.
+
+---
+
+## Pertemuan 9 - Laravel + Database + CRUD (Sprint 07)
+
+Fitur **Program Management** dibuat dengan Laravel di folder `laravel/`. Project lama (HTML, `api.js`, PHP MVC) tidak diubah.
+
+- Folder `laravel-files/` berisi file buatan kita: migration `create_programs_table`, model `Program`, `ProgramController`, route, view Blade, dan seeder.
+- Langkah membuat project Laravel, menjalankan, bukti per task, jawaban review, dan skrip demo ada di **`laravel-files/PETUNJUK-LARAVEL.md`**.
+- Database: SQLite. Tabel `programs` (`id`, `nama`, `deskripsi`, `kategori`, `lokasi`, `foto`, `target`, `tercapai`, `created_at`, `updated_at`). Status program dihitung dari `target` dan `tercapai`, tidak disimpan sebagai kolom.
