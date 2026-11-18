@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "nama": "Pakaian layak pakai",
+    "kategori": "Pakaian",
+    "kondisi": "Baik",
+    "lokasi": "Malang",
+    "deskripsi": "Satu kantong kemeja dan kaos, sudah dicuci.",
+    "foto": "https://picsum.photos/seed/pakaian/600/420",
+    "status": "tersedia",
+    "wa": "6281234567801",
+    "owner": "Rina"
+  },
+  {
+    "id": 2,
+    "nama": "Kardus bekas",
+    "kategori": "Kardus",
+    "kondisi": "Baik",
+    "lokasi": "Malang",
+    "deskripsi": "12 kardus ukuran sedang, cocok untuk pindahan.",
+    "foto": "https://picsum.photos/seed/kardus/600/420",
+    "status": "tersedia",
+    "wa": "6281234567802",
+    "owner": "Budi"
+  },
+  {
+    "id": 3,
+    "nama": "Buku bekas kuliah",
+    "kategori": "Buku",
+    "kondisi": "Baik",
+    "lokasi": "Malang",
+    "deskripsi": "Buku teknik dan manajemen semester 1-4.",
+    "foto": "https://picsum.photos/seed/buku/600/420",
+    "status": "tersedia",
+    "wa": "6281234567801",
+    "owner": "Rina"
+  },
+  {
+    "id": 4,
+    "nama": "Kipas angin meja",
+    "kategori": "Elektronik",
+    "kondisi": "Cukup",
+    "lokasi": "Malang",
+    "deskripsi": "Masih menyala, kecepatan 2 kurang stabil.",
+    "foto": "https://picsum.photos/seed/kipas/600/420",
+    "status": "tersedia",
+    "wa": "6281234567803",
+    "owner": "Sari"
+  },
+  {
+    "id": 5,
+    "nama": "Jaket Parasut Outdoor",
+    "kategori": "Pakaian",
+    "kondisi": "Baik",
+    "lokasi": "Malang",
+    "deskripsi": "Ukuran L, tahan angin dan gerimis, ritsleting lancar.",
+    "foto": "https://picsum.photos/seed/jaket/600/420",
+    "status": "tersedia",
+    "wa": "6281234567804",
+    "owner": "Dimas"
+  },
+  {
+    "id": 6,
+    "nama": "Novel & Komik Bekas",
+    "kategori": "Buku",
+    "kondisi": "Baik",
+    "lokasi": "Malang",
+    "deskripsi": "Koleksi novel petualangan dan beberapa komik, halaman lengkap.",
+    "foto": "https://picsum.photos/seed/novel/600/420",
+    "status": "tersedia",
+    "wa": "6281234567805",
+    "owner": "Ayu"
+  }
+]

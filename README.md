@@ -163,3 +163,12 @@ Fitur **Program Management** dibuat dengan Laravel di folder `laravel/`. Project
 - Folder `laravel-files/` berisi file buatan kita: migration `create_programs_table`, model `Program`, `ProgramController`, route, view Blade, dan seeder.
 - Langkah membuat project Laravel, menjalankan, bukti per task, jawaban review, dan skrip demo ada di **`laravel-files/PETUNJUK-LARAVEL.md`**.
 - Database: SQLite. Tabel `programs` (`id`, `nama`, `deskripsi`, `kategori`, `lokasi`, `foto`, `target`, `tercapai`, `created_at`, `updated_at`). Status program dihitung dari `target` dan `tercapai`, tidak disimpan sebagai kolom.
+
+## Pertemuan 10 - Controller, Routing, Validation, REST API (Sprint 08)
+
+Dikerjakan pada project Laravel di folder `laravel/` (file sumber di `laravel-files/`).
+
+- **Task 01:** CRUD dipindahkan ke `ProgramController`; `routes/web.php` hanya menunjuk ke method (GET, POST, PUT/PATCH, DELETE).
+- **Task 02:** `Request` dan validation (`required`, `string`, `max:100`, dst.) dengan pesan bahasa Indonesia di `app/Support/AturanProgram.php`.
+- **Task 03:** REST API `/api/programs` (GET, POST, GET detail, PUT, DELETE) di `routes/api.php` dan `Api/ProgramController`, status code 200, 201, 404, 422. Koleksi Postman: `laravel-files/postman/`.
+- Setup Laravel dan database dari nol, cara uji, jawaban review, dan skrip demo: **`laravel-files/PETUNJUK-LARAVEL.md`**.

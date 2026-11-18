@@ -1,0 +1,251 @@
+{
+  "info": {
+    "name": "Revault - Program API (Pertemuan 10)",
+    "description": "Jalankan dulu: php artisan serve. base_url bawaan: http://127.0.0.1:8000. Urutan demo: 01 sampai 07.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 GET semua program (200)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs"
+          ]
+        }
+      }
+    },
+    {
+      "name": "02 POST buat program (201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"Lingkungan\",\n  \"deskripsi\": \"Program di bidang lingkungan.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "03 GET detail program (200)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs/{{id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "04 PUT ubah program (200)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs/{{id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs",
+            "{{id}}"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"Pakaian Layak untuk Semua\",\n  \"deskripsi\": \"Program pakaian layak pakai terbaru.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "05 DELETE hapus program (200)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs/{{id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs",
+            "{{id}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "06 POST validasi: data kosong (422)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"\",\n  \"deskripsi\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "07 POST validasi: nama terlalu panjang (422)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\n  \"deskripsi\": \"Nama lebih dari 100 karakter.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "08 GET id tidak ada (404)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/programs/9999",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "programs",
+            "9999"
+          ]
+        }
+      }
+    }
+  ]
+}
